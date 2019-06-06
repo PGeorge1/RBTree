@@ -157,13 +157,17 @@ private:
         }
 
         if (node->parent)
-            edges += std::to_string( node->parent->data) + "->" + std::to_string( node->data) + ";";
+        {
+            std::string angle = node->parent->left == node ? "sw" : "se";
+            edges += std::to_string( node->parent->data) + ":" + angle + " ->" + std::to_string( node->data) + ";";
+        }
 
 
         save_tree_in_graphviz_format_call (node->left, vertices, edges);
         save_tree_in_graphviz_format_call (node->right, vertices, edges);
 
     }
+
 
     Node *NIL;                /* NIL element of the tree */
     Node *root;               /* root of Red-Black tree */
